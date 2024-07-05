@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
-import { jwt, sign, verify } from 'hono/jwt'
+import { sign } from 'hono/jwt'
 
 const app = new Hono<{
     Bindings: { // To get the right types on c.env, when initializing the Hono app, pass the types of env as a generic
@@ -61,9 +61,7 @@ app.post('/signin', async (c) => {
     }
 
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
-    return c.json({
-        jwt: token
-    })
+    return c.text(token)
 })
 
 export default app
