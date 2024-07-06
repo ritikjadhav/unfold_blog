@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { sign } from 'hono/jwt'
+import { SigninInput, SignupInput } from '@ritiksjadhav/unfold-common'
 
 const app = new Hono<{
     Bindings: { // To get the right types on c.env, when initializing the Hono app, pass the types of env as a generic
@@ -12,11 +13,19 @@ const app = new Hono<{
 
 app.post('/signup', async (c) => {
     try {
+        const body = await c.req.json()
+        const { success, error } = SignupInput.safeParse(body)
+        if (!success) {
+            return c.json({
+                error: error.issues.map((issue) => {
+                    return `message: ${issue.message}`
+                })
+            });
+        }
         const prisma = new PrismaClient({
             datasourceUrl: c.env.DATABASE_URL
         }).$extends(withAccelerate())
     
-        const body = await c.req.json()
         const existingUser = await prisma.user.findUnique({
             where: {
                 email: body.email
@@ -44,11 +53,20 @@ app.post('/signup', async (c) => {
 })
 
 app.post('/signin', async (c) => {
+    const body = await c.req.json()
+    const { success, error } = SigninInput.safeParse(body)
+    if (!success) {
+        return c.json({
+            error: error.issues.map((issue) => {
+                return `message: ${issue.message}`
+            })
+        });
+    }
+    
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
     }).$extends(withAccelerate())
 
-    const body = await c.req.json()
     const user = await prisma.user.findUnique({
         where: {
             email: body.email,

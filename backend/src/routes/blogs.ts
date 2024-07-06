@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
+import { CreatePostInput, UpdatePostInput } from '@ritiksjadhav/unfold-common';
 import { Hono } from 'hono';
 
 const app = new Hono<{
@@ -14,11 +15,21 @@ const app = new Hono<{
 
 app.post(async (c) => {
     try {
+        const body = await c.req.json()        
+        const { success, error } = CreatePostInput.safeParse(body)
+        if (!success) {
+            return c.json({
+                errors: error,
+                error: error.issues.map((issue) => {
+                    return `message: ${issue.message}`
+                })
+            });
+        }
+
         const prisma = new PrismaClient({
             datasourceUrl: c.env.DATABASE_URL
         }).$extends(withAccelerate())
 
-        const body = await c.req.json()        
         const post = await prisma.post.create({
             data: {
                 title: body.title,
@@ -41,10 +52,19 @@ app.post(async (c) => {
 
 app.put(async (c) => {
     try {
+        const body = await c.req.json()
+        const { success, error } = UpdatePostInput.safeParse(body)
+        if (!success) {
+            return c.json({
+                error: error.issues.map((issue) => {
+                    return `message: ${issue.message}`
+                })
+            });
+        }
+
         const prisma = new PrismaClient({
             datasourceUrl: c.env.DATABASE_URL
         }).$extends(withAccelerate())
-        const body = await c.req.json()
 
         const post = await prisma.post.update({
             where: {
