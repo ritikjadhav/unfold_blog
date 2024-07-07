@@ -89,7 +89,10 @@ app.post('/signin', async (c) => {
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
 
     c.status(200)
-    return c.text(token)
+    return c.json({
+        name: user?.name,
+        token: token
+    })
 })
 
 export default app

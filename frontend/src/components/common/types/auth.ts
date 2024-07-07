@@ -20,6 +20,7 @@ export type AlertProps = {
 }
 
 export type BlogCardProps = {
+    id: string
     authorName: string
     title: string
     content: string

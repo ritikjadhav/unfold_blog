@@ -1,5 +1,6 @@
 import { BlogCard } from '../components/BlogCard'
 import { Navbar } from '../components/common/Navbar'
+import { BlogsSkeleton } from '../components/common/skeleton/BlogsSkeleton'
 import { Blog } from '../components/common/types/auth'
 import { getBlogs } from '../components/hooks'
 
@@ -7,7 +8,16 @@ export const Blogs = () => {
     const { loading, blogs } = getBlogs()
 
     if (loading) {
-        return <div>loading...</div>
+        return (
+        <div>
+            <div className='mb-24'>
+                <Navbar authorName='Anonymous' />
+            </div>
+            <BlogsSkeleton />
+            <BlogsSkeleton />
+            <BlogsSkeleton />
+        </div>
+    )
     }
 
     return (
@@ -19,7 +29,9 @@ export const Blogs = () => {
                 {blogs.map((blog: Blog) => {
                     return (
                         <BlogCard
-                            authorName={blog.author.name}
+                            key={blog.id}
+                            id={blog.id}
+                            authorName={blog.author.name || 'Anonymous'}
                             title={blog.title}
                             content={blog.content}
                             publishedDate='3 Dec, 2023' />
