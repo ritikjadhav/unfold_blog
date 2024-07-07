@@ -18,3 +18,20 @@ export type ButtonProps = {
 export type AlertProps = {
     message: string
 }
+
+export type BlogCardProps = {
+    authorName: string
+    title: string
+    content: string
+    publishedDate: string
+}
+
+export type Blog = {
+    title: string
+    content: string
+    id: string
+    published: boolean
+    author: {
+        name: string
+    }
+}
