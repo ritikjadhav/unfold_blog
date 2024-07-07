@@ -14,3 +14,7 @@ export type ButtonProps = {
     onClick: () => void
     label: string
 }
+
+export type AlertProps = {
+    message: string
+}

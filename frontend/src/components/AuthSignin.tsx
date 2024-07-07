@@ -6,22 +6,25 @@ import { SigninType } from '@ritiksjadhav/unfold-common'
 import axios from 'axios'
 import { BACKEND_URL } from '../config'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Alert } from './ui/Alert'
 
 export const AuthSignin = () => {
     const methods = useForm<SigninType>()
     const navigate = useNavigate()
+    const [alert, setAlert] = useState('')
 
     const onSubmit = async (data?: SigninType) => {
-        try {
-            const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, data)
-            const jwt = response.data
-            console.log(jwt)
-            localStorage.setItem('token', jwt)
-            navigate('/blogs')
-        } catch (error) {
-            // alert the user
-            console.log('error:', error)           
-        }
+        setAlert('')
+        axios.post(`${BACKEND_URL}/api/v1/user/signin`, data)
+            .then((response) => {
+                const jwt = response.data
+                localStorage.setItem('token', jwt)
+                navigate('/blogs')
+            })
+            .catch((error) => {
+                setAlert(error.response.data.error)
+            })
     }
 
     return (
@@ -35,6 +38,9 @@ export const AuthSignin = () => {
                         <Button onClick={() => { }} label='Login' />
                     </form>
                 </FormProvider>
+            </div>
+            <div className='flex justify-center'>
+                {(alert !== '') && <Alert message={alert} />}
             </div>
         </div>)
 }
