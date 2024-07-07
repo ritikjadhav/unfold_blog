@@ -3,6 +3,7 @@ import users from './routes/users'
 import blogs from './routes/blogs'
 import { verify } from 'hono/jwt'
 import { PrismaClient } from '@prisma/client/extension'
+import { cors } from 'hono/cors'
 
 const app = new Hono<{
   Bindings: {
@@ -23,6 +24,8 @@ const app = new Hono<{
 //   c.set('prisma', prisma) // to implement
 //   await next()
 // })
+
+app.use('*', cors())
 
 app.use('/api/v1/blog/*', async (c, next) => {
   const token = c.req.header('Authorization')?.split(' ')[1]

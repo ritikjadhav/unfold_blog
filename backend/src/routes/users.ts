@@ -32,6 +32,7 @@ app.post('/signup', async (c) => {
             }
         })
         if (existingUser) {
+            c.status(401)
             return c.text('Oops! It looks like this email is already taken. Try a different one!')
         }
         
@@ -42,10 +43,9 @@ app.post('/signup', async (c) => {
             }
         })
         const token = await sign({ id: user.id }, c.env.JWT_SECRET )
-    
-        return c.json({
-            jwt: token
-        })   
+
+        c.status(201)
+        return c.text(token)   
     } catch (e) {
         c.status(403)
         c.json({ error: 'Well, this is awkward. Something went wrong. Try again in a bit!' })
@@ -75,10 +75,13 @@ app.post('/signin', async (c) => {
     })
 
     if (!user) {
+        c.status(401)
         return c.text('Hmm, that email or password didn\'t work. Double-check your spelling and try again!')
     }
 
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
+
+    c.status(200)
     return c.text(token)
 })
 
