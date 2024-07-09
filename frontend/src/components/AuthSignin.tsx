@@ -18,7 +18,7 @@ export const AuthSignin = () => {
         setAlert('')
         axios.post(`${BACKEND_URL}/api/v1/user/signin`, data)
             .then((response) => {
-                const jwt = response.data
+                const jwt = response.data.token
                 localStorage.setItem('token', jwt)
                 navigate('/blogs')
             })

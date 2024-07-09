@@ -2,10 +2,10 @@ import { BlogCard } from '../components/BlogCard'
 import { Navbar } from '../components/common/Navbar'
 import { BlogsSkeleton } from '../components/common/skeleton/BlogsSkeleton'
 import { Blog } from '../components/common/types/auth'
-import { getBlogs } from '../components/hooks'
+import { useBlogs } from '../components/hooks'
 
 export const Blogs = () => {
-    const { loading, blogs } = getBlogs()
+    const { loading, blogs } = useBlogs()
 
     if (loading) {
         return (
