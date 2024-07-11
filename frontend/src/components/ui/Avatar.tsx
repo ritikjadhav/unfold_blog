@@ -1,8 +1,12 @@
+import { useRecoilState } from 'recoil'
+import { user } from '../../recoil/atom'
 
-export const Avatar = ({ name, size = 10 }: { name: string, size?: number }) => {
+export const Avatar = ({ size = 10 }: { size?: number }) => {
+    const [userName] = useRecoilState(user)
+
     return (
-        <div className={`relative inline-flex items-center justify-center size-${size} ml-4 overflow-hidden bg-gray-100 rounded-full`}>
-            <span className="font-medium text-gray-600">{name.charAt(0)}</span>
+        <div className={`relative inline-flex items-center justify-center w-${size} h-${size} ml-4 overflow-hidden bg-gray-100 rounded-full`}>
+            <span className="font-medium text-gray-600">{userName.charAt(0)}</span>
         </div>
     )
 }

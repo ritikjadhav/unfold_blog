@@ -1,6 +1,6 @@
 import { Avatar } from '../ui/Avatar'
 
-export const Navbar = ({ authorName }: { authorName: string }) => {
+export const Navbar = () => {
     return (
         <div>
             <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
@@ -9,7 +9,7 @@ export const Navbar = ({ authorName }: { authorName: string }) => {
                         <span className="self-center text-2xl font-bold whitespace-nowrap">Unfold</span>
                     </div>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse cursor-pointer">
-                        <Avatar name={authorName} />
+                        <Avatar />
                     </div>
                 </div>
             </nav>

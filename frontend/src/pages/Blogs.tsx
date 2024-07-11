@@ -11,7 +11,7 @@ export const Blogs = () => {
         return (
         <div>
             <div className='mb-24'>
-                <Navbar authorName='Anonymous' />
+                <Navbar />
             </div>
             <BlogsSkeleton />
             <BlogsSkeleton />
@@ -23,7 +23,7 @@ export const Blogs = () => {
     return (
         <div>
             <div>
-                <Navbar authorName='Ritik' />
+                <Navbar />
             </div>
             <div className='flex flex-col mt-24'>
                 {blogs.map((blog: Blog) => {

@@ -8,17 +8,21 @@ import { BACKEND_URL } from '../config'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Alert } from './ui/Alert'
+import { useRecoilState } from 'recoil'
+import { user } from '../recoil/atom'
 
 export const AuthSignin = () => {
     const methods = useForm<SigninType>()
     const navigate = useNavigate()
     const [alert, setAlert] = useState('')
+    const [, setName] = useRecoilState(user)
 
     const onSubmit = async (data?: SigninType) => {
         setAlert('')
         axios.post(`${BACKEND_URL}/api/v1/user/signin`, data)
             .then((response) => {
                 const jwt = response.data.token
+                setName(response.data.name)
                 localStorage.setItem('token', jwt)
                 navigate('/blogs')
             })

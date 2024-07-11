@@ -29,10 +29,10 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
     )
 }
 
-const BlogCardHeader = ({ authorName, publishedDate }: { authorName: string, publishedDate: string }) => {
+const BlogCardHeader = ({ authorName, publishedDate }: { authorName: string, publishedDate: string }) => {    
     return (
         <div className='flex text-sm'>
-            <Avatar name='Ritik' size={8} />
+            <Avatar size={8} />
             <div className='flex flex-col justify-center font-normal ml-4'>
                 {authorName}
             </div>
