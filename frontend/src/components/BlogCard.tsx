@@ -20,7 +20,7 @@ export const BlogCard = ({ id, authorName, title, content, publishedDate }: Blog
                             </div>
                         </div>
                         <div>
-                            <img className="object-cover w-full h-96 md:h-auto md:w-40 md:ml-10" src={rules_img} alt="productivity-rules" />
+                            <img className="object-cover w-full h-96 md:h-auto md:w-40" src={rules_img} alt="productivity-rules" />
                         </div>
                     </div>
                 </div>

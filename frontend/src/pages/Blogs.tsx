@@ -9,15 +9,15 @@ export const Blogs = () => {
 
     if (loading) {
         return (
-        <div>
-            <div className='mb-24'>
-                <Navbar />
+            <div>
+                <div className='mb-24'>
+                    <Navbar />
+                </div>
+                <BlogsSkeleton />
+                <BlogsSkeleton />
+                <BlogsSkeleton />
             </div>
-            <BlogsSkeleton />
-            <BlogsSkeleton />
-            <BlogsSkeleton />
-        </div>
-    )
+        )
     }
 
     return (
