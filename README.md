@@ -2,91 +2,29 @@
 
 ## Project Description
 
-UnFold is a full-stack blogging application where users can share their thoughts, stories, and experiences. The application is built with modern web technologies, featuring a robust backend with Prisma, and Hono for efficient data handling. The frontend is built using React and Vite for fast and responsive user experiences. This project promotes clean architecture with reusable TypeScript utilities shared across the frontend and backend, ensuring seamless integration and a maintainable codebase.
+UnFold is a full-stack blogging platform where users can share their thoughts, stories, and experiences. The application is built using modern web technologies, with a backend powered by Hono.js and Prisma for efficient data management, and a frontend developed with React and Vite to provide a smooth, responsive user experience. The project follows clean architecture principles, featuring reusable TypeScript utilities shared between the frontend and backend for seamless integration and maintainability.
 
-## Technologies Used
+### Features
 
-### Backend
-- Hono
-- Prisma
-- TypeScript
+- **Create and Manage Blogs**: Users can create, edit, and delete their blogs effortlessly.
+- **Responsive Design**: Optimized for both desktop and mobile devices, ensuring a great user experience.
+- **User Authentication**: Secure authentication to manage user-generated content.
 
-### Frontend
-- React
-- Vite
-- TypeScript
-- Tailwind CSS
+### Tech Stack
 
-### Common
-- Shared TypeScript utilities
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Hono.js
+- **Database**: PostgreSQL
+- **Deployment**: Cloudflare Workers
 
-## Setup Instructions
+## Project Structure
 
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
+### Frontend (React.js)
 
-### Backend Setup
+- Handles the user interface and client-side logic.
+- Built with React.js and styled using Tailwind CSS.
 
-1. Navigate to the `backend` directory:
-    ```sh
-    cd backend
-    ```
+### Backend (Hono.js)
 
-2. Install dependencies:
-    ```sh
-    npm install
-    ```
-
-3. Set up environment variables by copying `.env.example` to `.env` and filling in the required values.
-
-4. Run Prisma migrations:
-    ```sh
-    npx prisma migrate dev
-    ```
-
-5. Start the backend server:
-    ```sh
-    npm run dev
-    ```
-
-### Frontend Setup
-
-1. Navigate to the `frontend` directory:
-    ```sh
-    cd frontend
-    ```
-
-2. Install dependencies:
-    ```sh
-    npm install
-    ```
-
-3. Start the frontend development server:
-    ```sh
-    npm run dev
-    ```
-
-### Common Setup
-
-1. Navigate to the `common` directory:
-    ```sh
-    cd common
-    ```
-
-2. Install dependencies:
-    ```sh
-    npm install
-    ```
-
-3. Build the shared utilities:
-    ```sh
-    npm run build
-    ```
-
-## Running the Project
-
-1. Start the backend server as described in the Backend Setup section.
-2. Start the frontend server as described in the Frontend Setup section.
-
-Once both servers are running, you can access the application in your browser.
+- Manages APIs and server-side operations.
+- Integrated with a PostgreSQL database to store and manage blog data.
